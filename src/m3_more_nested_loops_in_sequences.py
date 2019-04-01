@@ -44,7 +44,7 @@ def run_test_largest_number():
     answer = largest_number(([], [], []))
     print('Expected and actual are:', expected, answer)
 
-    # TODO 2 (continued): Add your ADDITIONAL test(s) here:
+    # DONE 2 (continued): Add your ADDITIONAL test(s) here:
     # Test 4:
     expected = 43
     answer = largest_number([(6, 7, 8),(42, 34, 43),
@@ -84,11 +84,13 @@ def largest_number(seq_seq):
     for k in range(len(seq_seq)):
         if(len(seq_seq[k])) > 0:
             greatest = seq_seq[k][0]
-            for j in range(len(seq_seq[k]):
-                if seq_seq[k][j] > greatest:
-                    greatest = seq_seq[k][j]
-                    return
-
+        for j in range(len(seq_seq)):
+            for q in range(len(seq_seq[j])):
+                if seq_seq[j][q] > greatest:
+                    greatest = seq_seq[j][q]
+    if greatest == 'None':
+        return greatest
+    return greatest
 
 
 
