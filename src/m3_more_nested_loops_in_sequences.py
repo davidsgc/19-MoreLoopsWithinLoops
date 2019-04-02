@@ -18,7 +18,7 @@ def main():
 def run_test_largest_number():
     """ Tests the    largest_number    function. """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # DONE: 2. Implement this TEST function.
     #   It TESTS the  largest_number  function defined below.
     #   Include at least ** 1 ** ADDITIONAL test beyond those we wrote.
     # -------------------------------------------------------------------------
@@ -77,19 +77,18 @@ def largest_number(seq_seq):
     where each subsequence contains only numbers.
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # -------------------------------------------------------------------------
-    greatest = 'None'
+    greatest = None
     for k in range(len(seq_seq)):
         if(len(seq_seq[k])) > 0:
             greatest = seq_seq[k][0]
-        for j in range(len(seq_seq)):
-            for q in range(len(seq_seq[j])):
-                if seq_seq[j][q] > greatest:
-                    greatest = seq_seq[j][q]
-    if greatest == 'None':
-        return greatest
+            break
+    for j in seq_seq:
+        for item in j:
+            if item > greatest:
+                greatest = item
     return greatest
 
 
@@ -97,7 +96,7 @@ def largest_number(seq_seq):
 def run_test_largest_negative_number():
     """ Tests the    largest_negative_number    function. """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement this TEST function.
+    # DONE: 4. Implement this TEST function.
     #   It TESTS the  largest_negative_number  function defined below.
     #
     #   Include enough tests to give you confidence that your solution
@@ -107,6 +106,15 @@ def run_test_largest_negative_number():
     print('-------------------------------------------------')
     print('Testing the   LARGEST_NEGATIVE_NUMBER   function:')
     print('-------------------------------------------------')
+    # Test 1:
+    expected = -2.1
+    actual = largest_negative_number([[30, -5.7, 8, -20], [100, -2.1, 88, -40, -5], [400,500]])
+    print('Expected and actual are:', expected, actual)
+
+    # Test 2:
+    expected = None
+    actual = largest_negative_number([[200, 350, 20], [500, 600]])
+    print('Expected and actual are:', expected, actual)
 
 
 def largest_negative_number(seq_seq):
@@ -132,14 +140,26 @@ def largest_negative_number(seq_seq):
     where each subsequence contains only numbers.
     """
     # -------------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # CHALLENGE: Try to solve this problem with no additional sequences
     #   being constructed (so the SPACE allowed is limited to the
     #   give sequence of sequences plus any non-list variables you want).
     # -------------------------------------------------------------------------
-
+    greatest = None
+    for k in seq_seq:
+        if k != []:
+            for j in k:
+                if j < 0:
+                    greatest = j
+                    break
+    if greatest != None:
+        for q in seq_seq:
+            for n in q:
+                if n > greatest and n < 0:
+                    greatest = n
+    return greatest
 
 def run_test_first_is_elsewhere_too():
     """ Tests the    first_is_elsewhere_too    function. """
@@ -387,7 +407,17 @@ def first_is_elsewhere_too(seq_seq):
     #   in this problem, as doing so would defeat the goal of providing
     #   practice at loops within loops (within loops within ...)
     # -------------------------------------------------------------------------
-
+    first_sequence = seq_seq[0]
+    if first_sequence == [] or first_sequence == () or first_sequence == '':
+        return False
+    else:
+        for k in first_sequence:
+            number = k
+            for n in range(1, len(seq_seq)):
+                for i in seq_seq[n]:
+                    if i == number:
+                        return True
+        return False
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
